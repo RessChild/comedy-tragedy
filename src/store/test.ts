@@ -1,22 +1,32 @@
-import {makeObservable, observable, action} from 'mobx';
+import {makeAutoObservable} from 'mobx';
 
 class Todo {
-  id = Math.random();
-  title = '';
-  finished = false;
+  number = 0;
+  title = 'ㅌㅔ스트';
 
-  constructor(title: string) {
-    makeObservable(this, {
-      title: observable,
-      finished: observable,
-      toggle: action,
-    });
-    this.title = title;
+  constructor() {
+    makeAutoObservable(this);
   }
 
-  toggle() {
-    this.finished = !this.finished;
+  get numberValue() {
+    return this.number;
+  }
+
+  plus() {
+    this.number = 1;
+  }
+
+  minus() {
+    this.number = -1;
+  }
+
+  getTitle() {
+    return this.title;
+  }
+
+  setTitle(title: string) {
+    this.title = title;
   }
 }
 
-export const todoStore = new Todo('하이');
+export const todoStore = new Todo();
